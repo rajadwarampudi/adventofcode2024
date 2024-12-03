@@ -24,6 +24,7 @@ buildNumber.properties
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
+.idea/vcs.xml
 .idea/libraries/
 *.iws
 *.iml

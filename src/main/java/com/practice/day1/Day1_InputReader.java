@@ -3,9 +3,7 @@ package com.practice.day1;
 import com.practice.InputReader;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
 
 public class Day1_InputReader {

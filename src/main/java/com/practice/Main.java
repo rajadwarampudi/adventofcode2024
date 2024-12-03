@@ -2,10 +2,61 @@ package com.practice;
 
 import com.practice.day1.Day1_Challenge;
 import com.practice.day1.Day1_InputReader;
+import com.practice.day2.Day2_Challenge;
+import com.practice.day2.Day2_InputReader;
+import com.practice.day3.Day3_Challenge;
+import com.practice.day3.Day3_InputReader;
 
 public class Main {
     public static void main(String[] args) {
+
+        //day3
+        executeDay3Challenge();
+
+        //day2
+        executeDay2Challenge();
+
+        //day1
         executeDay1Challenge();
+    }
+
+    private static void executeDay3Challenge() {
+        try {
+            Day3_InputReader day3InputReader = new Day3_InputReader("day3Input.txt");
+            Day3_Challenge day3Challenge = new Day3_Challenge();
+
+            int day_3_1_output = day3Challenge.getSumOfMultiplicationsFromCorruptedMemory(
+                    day3InputReader.getLineList());
+
+            int day_3_2_output = day3Challenge.getSumOfMultiplicationsFromCorruptedMemoryWithInstructions(
+                    day3InputReader.getLineList());
+
+            System.out.println("Output of day3:");
+            System.out.println("day3_1 output: " + day_3_1_output);
+            System.out.println("day3_2 output: " + day_3_2_output);
+            System.out.println("Output of day3 completed:");
+
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 3 challenge: " + ex.getMessage());
+        }
+    }
+
+    private static void executeDay2Challenge() {
+        try {
+            Day2_InputReader day2InputReader = new Day2_InputReader("day2Input.txt");
+            Day2_Challenge day2Challenge = new Day2_Challenge();
+
+            int day_2_1_output = day2Challenge.getNumberOfSafeReports(day2InputReader.getReportList());
+            int day_2_2_output = day2Challenge.getNumberOfSafeReportsWithProblemDampener(
+                    day2InputReader.getReportList());
+
+            System.out.println("Output of day2:");
+            System.out.println("day2_1 output: " + day_2_1_output);
+            System.out.println("day2_2 output: " + day_2_2_output);
+            System.out.println("Output of day2 completed:");
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 2 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay1Challenge() {
