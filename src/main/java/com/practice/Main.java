@@ -6,9 +6,14 @@ import com.practice.day2.Day2_Challenge;
 import com.practice.day2.Day2_InputReader;
 import com.practice.day3.Day3_Challenge;
 import com.practice.day3.Day3_InputReader;
+import com.practice.day4.Day4_Challenge;
+import com.practice.day4.Day4_InputReader;
 
 public class Main {
     public static void main(String[] args) {
+
+        //day4
+        executeDay4Challenge();
 
         //day3
         executeDay3Challenge();
@@ -18,6 +23,23 @@ public class Main {
 
         //day1
         executeDay1Challenge();
+    }
+
+    private static void executeDay4Challenge() {
+        try {
+            Day4_InputReader day4InputReader = new Day4_InputReader("day4Input.txt");
+            Day4_Challenge day4Challenge = new Day4_Challenge();
+
+            int day_4_1_output = day4Challenge.getNumberOfXMASWords(day4InputReader.getInputList());
+            int day_4_2_output = day4Challenge.getNumberOfXMASShapes(day4InputReader.getInputList());
+
+            System.out.println("Output of day4:");
+            System.out.println("day4_1 output: " + day_4_1_output);
+            System.out.println("day4_2 output: " + day_4_2_output);
+            System.out.println("Output of day4 completed:");
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 4 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay3Challenge() {

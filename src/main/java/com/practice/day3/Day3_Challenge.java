@@ -5,6 +5,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day3_Challenge {
+    /**
+     * Calculates the sum of the result of each valid "mul" expression in the given list of lines
+     * @param lineList
+     * @return sum of the result of each valid "mul" expression
+     */
     public int getSumOfMultiplicationsFromCorruptedMemory(List<String> lineList) {
         int result = 0;
         for (String line : lineList) {
@@ -13,6 +18,15 @@ public class Day3_Challenge {
 
         return result;
     }
+
+    /**
+     * Calculates the sum of the result of each valid "mul" expression in the given list of lines
+     * with the consideration of the current valid instruction
+     * mul expression will be considered if there is no current instruction or the current valid instruction is "do()"
+     * mul expression will be ingored if the current valid instruction is "don't()"
+     * @param lineList
+     * @return sum of the result of each valid "mul" expression
+     */
 
     public int getSumOfMultiplicationsFromCorruptedMemoryWithInstructions(List<String> lineList) {
         StringBuilder totalLines = new StringBuilder();
