@@ -1,6 +1,8 @@
 package com.practice.day3;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Day3_Challenge {
     public int getSumOfMultiplicationsFromCorruptedMemory(List<String> lineList) {
@@ -15,7 +17,7 @@ public class Day3_Challenge {
     public int getSumOfMultiplicationsFromCorruptedMemoryWithInstructions(List<String> lineList) {
         StringBuilder totalLines = new StringBuilder();
         for (String line : lineList) {
-            totalLines.append(line);
+            totalLines.append(line).append("-");
         }
 
         return getSumOfMultiplicationsFromCorruptedMemoryWithInstructions(totalLines.toString());
@@ -23,72 +25,50 @@ public class Day3_Challenge {
 
     private int getSumOfMultiplicationsFromCorruptedMemory(String line) {
         int result = 0;
-        int mulStartIndex = line.indexOf("mul(");
-        int mulEndIndex = line.indexOf(')', mulStartIndex);
-        while (mulStartIndex != -1 && mulEndIndex != -1) {
-            if (isValidMulEndIndex(mulStartIndex, mulEndIndex)) {
-                result += processMul(line, mulStartIndex, mulEndIndex);
-            }
+        Matcher matcher = Pattern.compile("mul\\(\\d{1,3},\\d{1,3}\\)").matcher(line);
 
-            mulStartIndex = line.indexOf("mul(", mulStartIndex + 4);
-            mulEndIndex = line.indexOf(')', mulStartIndex);
+        while (matcher.find()) {
+            result += processMulExpression(matcher.group());
         }
 
         return result;
+    }
+
+    private int processMulExpression(String expression) {
+        String parametersString = expression.substring(4, expression.length() - 1);
+        String[] parameters = parametersString.split(",");
+        return Integer.parseInt(parameters[0]) * Integer.parseInt(parameters[1]);
     }
 
     private int getSumOfMultiplicationsFromCorruptedMemoryWithInstructions(String line) {
         int result = 0;
-        int mulStartIndex = line.indexOf("mul(");
-        int mulEndIndex = line.indexOf(')', mulStartIndex);
-        while (mulStartIndex != -1 && mulEndIndex != -1) {
-            if (isValidMulEndIndex(mulStartIndex, mulEndIndex) &&
-                    isAllowedByInstruction(line, mulStartIndex)) {
-                result += processMul(line, mulStartIndex, mulEndIndex);
+        boolean isMulExpressionAllowed = true;
+        int idx = 0;
+        while (idx < line.length() - 8) {
+            if ("do()".equals(line.substring(idx, idx + 4))) {
+                isMulExpressionAllowed = true;
+                idx = idx + 4;
+                continue;
+            } else if ("don't()".equals(line.substring(idx, idx + 7))) {
+                isMulExpressionAllowed = false;
+                idx = idx + 7;
+                continue;
+            } else if (isMulExpressionAllowed && line.charAt(idx) == 'm') {
+                Matcher mulExpMatcher = Pattern.compile("mul\\(\\d{1,3},\\d{1,3}\\)").matcher(line);
+                int endIdx = Math.min(idx + 12, line.length() - 1);
+                mulExpMatcher.region(idx, endIdx);
+                if (mulExpMatcher.find()) {
+                    result += processMulExpression(mulExpMatcher.group());
+                    idx = mulExpMatcher.end();
+                } else {
+                    idx++;
+                }
+                continue;
             }
-
-            mulStartIndex = line.indexOf("mul(", mulStartIndex + 4);
-            mulEndIndex = line.indexOf(')', mulStartIndex);
+            idx++;
         }
 
         return result;
     }
 
-    private boolean isAllowedByInstruction(String line, int mulStartIndex) {
-        int doInstructionIndex = line.lastIndexOf("do()", mulStartIndex);
-        int dontInstructionIndex = line.lastIndexOf("don't()", mulStartIndex);
-
-        return dontInstructionIndex == -1 || doInstructionIndex >= dontInstructionIndex;
-    }
-
-    private int processMul(String line, int mulStartIndex, int mulEndIndex) {
-        int result = 0;
-        String parametersString = line.substring(mulStartIndex + 4, mulEndIndex);
-        String[] parameters = parametersString.split(",");
-        if (parameters.length == 2) {
-            if (isValidParameter(parameters[0]) && isValidParameter(parameters[1])) {
-                result += Integer.parseInt(parameters[0]) * Integer.parseInt(parameters[1]);
-            }
-        }
-
-        return result;
-    }
-
-    private boolean isValidParameter(String parameter) {
-        try {
-            int parameterValue = Integer.parseInt(parameter);
-            if (parameterValue < 1 || parameterValue > 999) return false;
-        } catch (Exception ex) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean isValidMulEndIndex(int mulStartIndex, int mulEndIndex) {
-        if (mulEndIndex == -1) return false;
-        int mulExpLength = (mulEndIndex - mulStartIndex) + 1;
-        // valid expression's length is in between 8 and 12 because the digits in each parameter is 1 to 3
-        return mulExpLength >= 8 && mulExpLength <= 12;
-    }
 }

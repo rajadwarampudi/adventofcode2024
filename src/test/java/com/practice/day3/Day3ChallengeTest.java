@@ -34,8 +34,15 @@ public class Day3ChallengeTest {
                 org.junit.jupiter.params.provider.Arguments.of(List.of(
                         "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"), 48),
                 org.junit.jupiter.params.provider.Arguments.of(List.of(
+                        "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(200,999))"), 8 + (200 * 999)),
+                org.junit.jupiter.params.provider.Arguments.of(List.of(
+                        "xmul(2,4)&mul[3,7]!^don't()do()_mul(5,5)+mul(32,64](mul(11,8)undo)?mul(200,999))"), (2 * 4) + (5 * 5) + (11 * 8) + (200 * 999)),
+                org.junit.jupiter.params.provider.Arguments.of(List.of(
                         "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))don't()",
-                        "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))don't()"), 88));
+                        "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))don't()"), 88),
+                org.junit.jupiter.params.provider.Arguments.of(List.of(
+                        "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))don't()",
+                        "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))mul(22,99))"), 2266));
     }
 
     @ParameterizedTest
