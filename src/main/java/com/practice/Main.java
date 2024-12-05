@@ -8,9 +8,14 @@ import com.practice.day3.Day3_Challenge;
 import com.practice.day3.Day3_InputReader;
 import com.practice.day4.Day4_Challenge;
 import com.practice.day4.Day4_InputReader;
+import com.practice.day5.Day5_Challenge;
+import com.practice.day5.Day5_InputReader;
 
 public class Main {
     public static void main(String[] args) {
+
+        //day5
+        executeDay5Challenge();
 
         //day4
         executeDay4Challenge();
@@ -23,6 +28,27 @@ public class Main {
 
         //day1
         executeDay1Challenge();
+    }
+
+    private static void executeDay5Challenge() {
+        try {
+            Day5_InputReader day5InputReader = new Day5_InputReader("day5Input.txt");
+            Day5_Challenge day5Challenge = new Day5_Challenge();
+
+            int day_5_1_output = day5Challenge.getSumOfMiddlePageNumbersFromValidPageUpdates(
+                    day5InputReader.getPageOrderRules(), day5InputReader.getPageUpdates());
+
+            int day_5_2_output = day5Challenge.getSumOfMiddlePageNumbersFromInvalidPageUpdatesAfterFixing(
+                    day5InputReader.getPageOrderRules(), day5InputReader.getPageUpdates());
+
+            System.out.println("Output of day5:");
+            System.out.println("day5_1 output: " + day_5_1_output);
+            System.out.println("day5_2 output: " + day_5_2_output);
+            System.out.println("Output of day4 completed:");
+
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 5 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay4Challenge() {
