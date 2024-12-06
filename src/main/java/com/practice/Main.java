@@ -10,24 +10,51 @@ import com.practice.day4.Day4_Challenge;
 import com.practice.day4.Day4_InputReader;
 import com.practice.day5.Day5_Challenge;
 import com.practice.day5.Day5_InputReader;
+import com.practice.day6.Day6_2_Challenge;
+import com.practice.day6.Day6_Challenge;
+import com.practice.day6.Day6_InputReader;
 
 public class Main {
     public static void main(String[] args) {
 
+        //day6
+        executeDay6Challenge();
+
         //day5
-        executeDay5Challenge();
+        //executeDay5Challenge();
 
         //day4
-        executeDay4Challenge();
+        //executeDay4Challenge();
 
         //day3
-        executeDay3Challenge();
+        //executeDay3Challenge();
 
         //day2
-        executeDay2Challenge();
+        //executeDay2Challenge();
 
         //day1
-        executeDay1Challenge();
+        //executeDay1Challenge();
+    }
+
+    private static void executeDay6Challenge() {
+        try {
+            Day6_InputReader day6InputReader = new Day6_InputReader("day6Input.txt");
+            Day6_Challenge day6Challenge = new Day6_Challenge();
+            Day6_2_Challenge day6_2_challenge = new Day6_2_Challenge();
+
+            int day_6_1_output = day6Challenge.getNumberOfDistinctPositionsVisited(day6InputReader.getMap(),
+                    day6InputReader.getStartIndex());
+
+            int day_6_2_output = day6_2_challenge.getNumberOfNewObstructionsToMakeInfiniteLoops(day6InputReader.getMap(),
+                    day6InputReader.getStartIndex());
+
+            System.out.println("Output of day5:");
+            System.out.println("day6_1 output: " + day_6_1_output);
+            System.out.println("day6_2 output: " + day_6_2_output);
+            System.out.println("Output of day4 completed:");
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 6 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay5Challenge() {
