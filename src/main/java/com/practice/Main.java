@@ -13,12 +13,17 @@ import com.practice.day5.Day5_InputReader;
 import com.practice.day6.Day6_2_Challenge;
 import com.practice.day6.Day6_Challenge;
 import com.practice.day6.Day6_InputReader;
+import com.practice.day7.Day7_Challenge;
+import com.practice.day7.Day7_InputReader;
 
 public class Main {
     public static void main(String[] args) {
 
+        //day7
+        executeDay7Challenge();
+
         //day6
-        executeDay6Challenge();
+        //executeDay6Challenge();
 
         //day5
         //executeDay5Challenge();
@@ -36,6 +41,24 @@ public class Main {
         //executeDay1Challenge();
     }
 
+    private static void executeDay7Challenge() {
+        try {
+            Day7_InputReader day7InputReader = new Day7_InputReader("day7Input.txt");
+            Day7_Challenge day7Challenge = new Day7_Challenge();
+
+            long day_7_1_output = day7Challenge.getTotalCalibrationResult(day7InputReader.getInputList());
+            long day_7_2_output = day7Challenge.getTotalCalibrationResultIncludingConcatenationOperator(day7InputReader.getInputList());
+
+            System.out.println("Output of day7:");
+            System.out.println("day7_1 output: " + day_7_1_output);
+            System.out.println("day7_2 output: " + day_7_2_output);
+            System.out.println("Output of day7 completed:");
+
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 7 challenge: " + ex.getMessage());
+        }
+    }
+
     private static void executeDay6Challenge() {
         try {
             Day6_InputReader day6InputReader = new Day6_InputReader("day6Input.txt");
@@ -48,10 +71,10 @@ public class Main {
             int day_6_2_output = day6_2_challenge.getNumberOfNewObstructionsToMakeInfiniteLoops(day6InputReader.getMap(),
                     day6InputReader.getStartIndex());
 
-            System.out.println("Output of day5:");
+            System.out.println("Output of day6:");
             System.out.println("day6_1 output: " + day_6_1_output);
             System.out.println("day6_2 output: " + day_6_2_output);
-            System.out.println("Output of day4 completed:");
+            System.out.println("Output of day6 completed:");
         } catch (Exception ex) {
             System.out.println("Exception occurred for day 6 challenge: " + ex.getMessage());
         }
@@ -71,7 +94,7 @@ public class Main {
             System.out.println("Output of day5:");
             System.out.println("day5_1 output: " + day_5_1_output);
             System.out.println("day5_2 output: " + day_5_2_output);
-            System.out.println("Output of day4 completed:");
+            System.out.println("Output of day5 completed:");
 
         } catch (Exception ex) {
             System.out.println("Exception occurred for day 5 challenge: " + ex.getMessage());

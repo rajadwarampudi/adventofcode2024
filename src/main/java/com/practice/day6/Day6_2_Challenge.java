@@ -24,14 +24,16 @@ public class Day6_2_Challenge {
     private int traverseUpwards(char[][] map, int currentRow, int currentCol, List<int[]> visitedObstructionsList) {
         int newObstructionCount = 0;
         while (currentRow >= 0 && map[currentRow][currentCol] != OBSTRUCTION) {
-            if (doesAnyVisitedObstructionExistsInSameRowWhileGoingUpwards(visitedObstructionsList, currentRow, currentCol)) {
-                if (currentRow != 0) {
-                     if (map[currentRow - 1][currentCol] != NEW_OBSTRUCTION && map[currentRow - 1][currentCol] != OBSTRUCTION) {
-                         map[currentRow - 1][currentCol] = NEW_OBSTRUCTION;
-                         newObstructionCount += 1;
-                     }
-                } else if (map[currentRow][currentCol] != NEW_OBSTRUCTION && map[currentRow][currentCol] != OBSTRUCTION){
-                    newObstructionCount += 1;
+            for (int i = 0; i < visitedObstructionsList.size() - 2 ; i++) {
+                if (visitedObstructionsList.get(i)[0] == currentRow && visitedObstructionsList.get(i)[1] > currentCol) {
+                    if (currentRow != 0) {
+                        if (map[currentRow - 1][currentCol] != NEW_OBSTRUCTION && map[currentRow - 1][currentCol] != OBSTRUCTION) {
+                            map[currentRow - 1][currentCol] = NEW_OBSTRUCTION;
+                            newObstructionCount += 1;
+                        }
+                    } else if (map[currentRow][currentCol] != NEW_OBSTRUCTION && map[currentRow][currentCol] != OBSTRUCTION){
+                        newObstructionCount += 1;
+                    }
                 }
             }
             currentRow--;
@@ -57,14 +59,16 @@ public class Day6_2_Challenge {
     private int traverseRight(char[][] map, int currentRow, int currentCol, List<int[]> visitedObstructionsList) {
         int newObstructionCount = 0;
         while (currentCol < map[currentRow].length && map[currentRow][currentCol] != OBSTRUCTION) {
-            if (doesAnyVisitedObstructionExistsInSameColumnWhileGoingRight(visitedObstructionsList, currentRow, currentCol)) {
-                if (currentCol < map[currentRow].length - 1) {
-                    if (map[currentRow][currentCol + 1] != NEW_OBSTRUCTION && map[currentRow][currentCol + 1] != OBSTRUCTION) {
-                        map[currentRow][currentCol + 1] = NEW_OBSTRUCTION;
+            for (int i = 0; i < visitedObstructionsList.size() - 2 ; i++) {
+                if (visitedObstructionsList.get(i)[1] == currentCol && visitedObstructionsList.get(i)[0] > currentRow) {
+                    if (currentCol < map[currentRow].length - 1) {
+                        if (map[currentRow][currentCol + 1] != NEW_OBSTRUCTION && map[currentRow][currentCol + 1] != OBSTRUCTION) {
+                            map[currentRow][currentCol + 1] = NEW_OBSTRUCTION;
+                            newObstructionCount += 1;
+                        }
+                    } else if (map[currentRow][currentCol] != NEW_OBSTRUCTION && map[currentRow][currentCol] != OBSTRUCTION){
                         newObstructionCount += 1;
                     }
-                } else if (map[currentRow][currentCol] != NEW_OBSTRUCTION && map[currentRow][currentCol] != OBSTRUCTION){
-                    newObstructionCount += 1;
                 }
             }
             currentCol++;
@@ -88,16 +92,17 @@ public class Day6_2_Challenge {
     private int traverseDownwards(char[][] map, int currentRow, int currentCol, List<int[]> visitedObstructionsList) {
         int newObstructionCount = 0;
         while (currentRow < map.length && map[currentRow][currentCol] != OBSTRUCTION) {
-            if (doesAnyVisitedObstructionExistsInSameRowWhileGoingDownwards(visitedObstructionsList, currentRow, currentCol)) {
-                if (currentRow < map.length - 1) {
-                    if (map[currentRow + 1][currentCol] != NEW_OBSTRUCTION && map[currentRow + 1][currentCol] != OBSTRUCTION) {
-                        map[currentRow + 1][currentCol] = NEW_OBSTRUCTION;
+            for (int i = 0; i < visitedObstructionsList.size() - 2 ; i++) {
+                if (visitedObstructionsList.get(i)[0] == currentRow && visitedObstructionsList.get(i)[1] < currentCol) {
+                    if (currentRow < map.length - 1) {
+                        if (map[currentRow + 1][currentCol] != NEW_OBSTRUCTION && map[currentRow + 1][currentCol] != OBSTRUCTION) {
+                            map[currentRow + 1][currentCol] = NEW_OBSTRUCTION;
+                            newObstructionCount += 1;
+                        }
+                    } else if (map[currentRow][currentCol] != NEW_OBSTRUCTION && map[currentRow][currentCol] != OBSTRUCTION){
                         newObstructionCount += 1;
                     }
-                } else if (map[currentRow][currentCol] != NEW_OBSTRUCTION && map[currentRow][currentCol] != OBSTRUCTION){
-                    newObstructionCount += 1;
                 }
-
             }
             currentRow++;
         }
@@ -120,16 +125,17 @@ public class Day6_2_Challenge {
     private int traverseLeft(char[][] map, int currentRow, int currentCol, List<int[]> visitedObstructionsList) {
         int newObstructionCount = 0;
         while (currentCol >= 0 && map[currentRow][currentCol] != OBSTRUCTION) {
-            if (doesAnyVisitedObstructionExistsInSameColumnWhileGoingLeft(visitedObstructionsList, currentRow, currentCol)) {
-                if (currentCol != 0) {
-                    if (map[currentRow][currentCol - 1] != NEW_OBSTRUCTION && map[currentRow][currentCol - 1] != OBSTRUCTION) {
-                        map[currentRow][currentCol - 1] = NEW_OBSTRUCTION;
+            for (int i = 0; i < visitedObstructionsList.size() - 2 ; i++) {
+                if (visitedObstructionsList.get(i)[1] == currentCol && visitedObstructionsList.get(i)[0] < currentRow) {
+                    if (currentCol != 0) {
+                        if (map[currentRow][currentCol - 1] != NEW_OBSTRUCTION && map[currentRow][currentCol - 1] != OBSTRUCTION) {
+                            map[currentRow][currentCol - 1] = NEW_OBSTRUCTION;
+                            newObstructionCount += 1;
+                        }
+                    } else if (map[currentRow][currentCol] != NEW_OBSTRUCTION && map[currentRow][currentCol] != OBSTRUCTION){
                         newObstructionCount += 1;
                     }
-                } else if (map[currentRow][currentCol] != NEW_OBSTRUCTION && map[currentRow][currentCol] != OBSTRUCTION){
-                    newObstructionCount += 1;
                 }
-
             }
             currentCol--;
         }
