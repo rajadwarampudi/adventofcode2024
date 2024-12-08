@@ -15,12 +15,17 @@ import com.practice.day6.Day6_Challenge;
 import com.practice.day6.Day6_InputReader;
 import com.practice.day7.Day7_Challenge;
 import com.practice.day7.Day7_InputReader;
+import com.practice.day8.Day8_Challenge;
+import com.practice.day8.Day8_InputReader;
 
 public class Main {
     public static void main(String[] args) {
 
+        //day8
+        executeDay8Challenge();
+
         //day7
-        executeDay7Challenge();
+        //executeDay7Challenge();
 
         //day6
         //executeDay6Challenge();
@@ -39,6 +44,22 @@ public class Main {
 
         //day1
         //executeDay1Challenge();
+    }
+
+    private static void executeDay8Challenge() {
+        try {
+            Day8_InputReader day8InputReader = new Day8_InputReader("day8Input.txt");
+            Day8_Challenge day8Challenge = new Day8_Challenge();
+
+            int day_8_1_output = day8Challenge.getNumberOfAntiNodes(day8InputReader.getMap());
+
+            System.out.println("Output of day8:");
+            System.out.println("day8_1 output: " + day_8_1_output);
+            System.out.println("Output of day8 completed:");
+
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 8 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay7Challenge() {
