@@ -17,12 +17,17 @@ import com.practice.day7.Day7_Challenge;
 import com.practice.day7.Day7_InputReader;
 import com.practice.day8.Day8_Challenge;
 import com.practice.day8.Day8_InputReader;
+import com.practice.day9.Day9_Challenge;
+import com.practice.day9.Day9_InputReader;
 
 public class Main {
     public static void main(String[] args) {
 
+        //day9
+        executeDay9Challenge();
+
         //day8
-        executeDay8Challenge();
+        //executeDay8Challenge();
 
         //day7
         //executeDay7Challenge();
@@ -44,6 +49,24 @@ public class Main {
 
         //day1
         //executeDay1Challenge();
+    }
+
+    private static void executeDay9Challenge() {
+        try {
+            Day9_InputReader day9InputReader = new Day9_InputReader("day9Input.txt");
+            Day9_Challenge day9Challenge = new Day9_Challenge();
+
+            long day_9_1_output = day9Challenge.getFileSystemChecksum(day9InputReader.getInputLine());
+            long day_9_2_output = day9Challenge.getFileSystemChecksumWithSameIdFileMovementAtOnce(day9InputReader.getInputLine());
+
+            System.out.println("Output of day9:");
+            System.out.println("day9_1 output: " + day_9_1_output);
+            System.out.println("day9_2 output: " + day_9_2_output);
+            System.out.println("Output of day9 completed:");
+
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 9 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay8Challenge() {

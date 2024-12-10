@@ -1,105 +1,139 @@
-package com.practice.day8;
+package com.practice.day9;
 
 import java.util.*;
 
-public class Day8_Challenge {
+public class Day9_Challenge {
 
-    public int getNumberOfAntiNodes(char[][] map) {
-        Map<Character, List<Index>> antennaIndexMap = getAntennaIndexMap(map);
 
-        return getAntiNodeCount(antennaIndexMap, map.length, map[0].length);
+    public static final int FREE_SPACE = -1;
+
+    public long getFileSystemChecksum(String inputLine) {
+        char[] inputCharArray = inputLine.toCharArray();
+        List<Integer> diskMapList = generateDiskMapList(inputCharArray);
+
+        return getFileSystemChecksum(diskMapList);
 
     }
 
-    public int getNumberOfAntiNodesIncludingAntiNodesAsAntennas(char[][] map) {
-        Map<Character, List<Index>> antennaIndexMap = getAntennaIndexMap(map);
-        Set<Index> antiNodeIndexSet = getAntiNodeIndexSet(antennaIndexMap, map.length, map[0].length);
+    public long getFileSystemChecksumWithSameIdFileMovementAtOnce(String inputLine) {
+        char[] inputCharArray = inputLine.toCharArray();
+        List<Block> blockList = generateBlockList(inputCharArray);
+        List<Block> blockListAfterFileMovement = moveFilesInOrderOfDecreasingIDNumber(blockList);
 
-        List<Index> antiNodeIndexList = new ArrayList<>(antiNodeIndexSet);
+        return getFileSystemChecksumWithSameIdFileMovementAtOnce(blockListAfterFileMovement);
 
-        for (int i = 0; i < antiNodeIndexList.size() - 1; i++) {
-            for (int j = i + 1; j < antiNodeIndexList.size(); j++) {
-                Set<Index> antiNodeIndexsubSet = getAntiNodeIndexSet(antiNodeIndexList.get(i),
-                        antiNodeIndexList.get(j), map.length, map[0].length);
-                for (Index newAntiNodeIndex : antiNodeIndexsubSet) {
-                    if (antiNodeIndexSet.add(newAntiNodeIndex)) {
-                        antiNodeIndexList.add(newAntiNodeIndex);
+    }
+
+    private List<Block> moveFilesInOrderOfDecreasingIDNumber(List<Block> blockList) {
+
+        List<Block> updatedBlockList = new ArrayList<>(blockList);
+
+        for (int i = blockList.size() - 1; i > 0; i--) {
+            Block block = blockList.get(i);
+            if (block.value() != FREE_SPACE) {
+                boolean isBlockUpdated = false;
+                for (int j = 0; j < updatedBlockList.size() - 1; j++) {
+                    Block updatingBlock = updatedBlockList.get(j);
+                    if (updatingBlock.value() == FREE_SPACE && updatingBlock.count() >= block.count()) {
+                        updatedBlockList.set(j, new Block(block.value(), updatingBlock.startIndex(), block.count()));
+                        if (updatingBlock.count() > block.count()) {
+                            updatedBlockList.add(j + 1, new Block(FREE_SPACE,
+                                    updatingBlock.startIndex() + block.count(),
+                                    updatingBlock.count() - block.count()));
+                        }
+                        isBlockUpdated = true;
+                        break;
+                    }
+                }
+
+                if (isBlockUpdated) {
+                    for (int j = updatedBlockList.size() - 1; j >= 0; j--) {
+                        if (updatedBlockList.get(j).value() == block.value()) {
+                            updatedBlockList.set(j, new Block(FREE_SPACE, block.startIndex(), block.count()));
+                            break;
+                        }
                     }
                 }
             }
+
         }
 
-        return antiNodeIndexSet.size();
+        return updatedBlockList;
+
     }
 
-    private static int getAntiNodeCount(Map<Character, List<Index>> antennaIndexMap, int rows, int columns) {
-        Set<Index> antiNodeIndexSet = getAntiNodeIndexSet(antennaIndexMap, rows, columns);
-        return antiNodeIndexSet.size();
-    }
+    private long getFileSystemChecksumWithSameIdFileMovementAtOnce(List<Block> blockList) {
+        long fileSystemCheckSum = 0L;
+        int memoryBlockIndex = 0;
 
-    private static Set<Index> getAntiNodeIndexSet(Map<Character, List<Index>> antennaIndexMap, int rows, int columns) {
-        Set<Index> antiNodeIndexSet = new HashSet<>();
-
-        for (List<Index> antennaCoordinates : antennaIndexMap.values()) {
-            antiNodeIndexSet.addAll(getAntiNodeIndexSet(antennaCoordinates, rows, columns));
-        }
-        return antiNodeIndexSet;
-    }
-
-    private static Set<Index> getAntiNodeIndexSet(List<Index> antennaCoordinates, int rows, int columns) {
-        Set<Index> antiNodeIndexAtUniqueAntennaLevelSet = new HashSet<>();
-        for (int i = 0; i < antennaCoordinates.size() - 1; i++) {
-            Index firstIndex = antennaCoordinates.get(i);
-            for (int j  = i + 1; j < antennaCoordinates.size(); j++) {
-                Index secondIndex = antennaCoordinates.get(j);
-                antiNodeIndexAtUniqueAntennaLevelSet.addAll(getAntiNodeIndexSet(firstIndex, secondIndex, rows, columns));
-            }
-        }
-
-        return antiNodeIndexAtUniqueAntennaLevelSet;
-    }
-
-    private static Set<Index> getAntiNodeIndexSet(Index firstIndex, Index secondIndex, int rows, int columns) {
-
-        Index oneAntiNodeIndex = getAntennaIndexMap(firstIndex, secondIndex);
-        Index secondAntiNodeIndex = getAntennaIndexMap(secondIndex, firstIndex);
-
-        return new HashSet<>(getValidAntiNodesSet(rows, columns, oneAntiNodeIndex, secondAntiNodeIndex));
-    }
-
-    private static Set<Index> getValidAntiNodesSet(int rows, int columns, Index... antiNodeIndices) {
-        Set<Index> antiNodeIndexSet = new HashSet<>();
-        for (Index antiNodeIndex : antiNodeIndices) {
-            if (isValidIndex(antiNodeIndex, rows, columns)) {
-                antiNodeIndexSet.add(antiNodeIndex);
-            }
-        }
-        return antiNodeIndexSet;
-    }
-
-    private static boolean isValidIndex(Index antiNodeIndex, int rows, int columns) {
-        return (antiNodeIndex.x() >= 0 && antiNodeIndex.x() < rows) && (antiNodeIndex.y() >= 0 && antiNodeIndex.y() < columns);
-    }
-
-    private static Index getAntennaIndexMap(Index currentIndex, Index referenceIndex) {
-        return new Index(currentIndex.x() + (currentIndex.x() - referenceIndex.x()),
-                currentIndex.y() + (currentIndex.y() - referenceIndex.y()));
-    }
-
-
-    private static Map<Character, List<Index>> getAntennaIndexMap(char[][] map) {
-        Map<Character, List<Index>> antennaIndexMap = new HashMap<>();
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[0].length; j++) {
-                char ch = map[i][j];
-                if (Character.isLowerCase(ch) || Character.isUpperCase(ch) || Character.isDigit(ch)) {
-                    antennaIndexMap.computeIfAbsent(map[i][j], k -> new ArrayList<>()).add(new Index(i , j));
+        for (Block block : blockList) {
+            for (int i = 0; i < block.count(); i++) {
+                if (block.value() != FREE_SPACE) {
+                    long value = block.value();
+                    fileSystemCheckSum += value * memoryBlockIndex;
                 }
+                memoryBlockIndex++;
             }
         }
 
-        return antennaIndexMap;
+        return fileSystemCheckSum;
     }
 
+    private long getFileSystemChecksum(List<Integer> diskMapList) {
+        long fileSystemCheckSum = 0L;
+        int i = 0, j = diskMapList.size() - 1;
 
+        while (i <= j) {
+            int numAtIndexI = diskMapList.get(i);
+            if (numAtIndexI == FREE_SPACE) {
+                while (diskMapList.get(j) == FREE_SPACE) {
+                    j--;
+                }
+                if (j > i) {
+                    int numAtIndexJ = diskMapList.get(j);
+                    fileSystemCheckSum +=  (long) i * numAtIndexJ;
+                    j--;
+                }
+            } else {
+                fileSystemCheckSum += (long) i * numAtIndexI;
+            }
+            i++;
+        }
+
+        return fileSystemCheckSum;
+    }
+
+    private static List<Integer> generateDiskMapList(char[] inputCharArray) {
+        List<Integer> diskMapList = new ArrayList<>();
+        for (int i = 0; i < inputCharArray.length; i++) {
+            char ch = inputCharArray[i];
+            int chDigit = Character.getNumericValue(ch);
+            if (i % 2 == 0) {
+                int currentIndex = i / 2;
+                diskMapList.addAll(Collections.nCopies(chDigit, currentIndex));
+            } else {
+                diskMapList.addAll(Collections.nCopies(chDigit, FREE_SPACE));
+            }
+        }
+
+        return diskMapList;
+    }
+
+    private static List<Block> generateBlockList(char[] inputCharArray) {
+        List<Block> blockList = new ArrayList<>();
+        int index = 0;
+        for (int i = 0; i < inputCharArray.length; i++) {
+            char ch = inputCharArray[i];
+            int chDigit = Character.getNumericValue(ch);
+            if (i % 2 == 0) {
+                int currentIndex = i / 2;
+                blockList.add(new Block(currentIndex, index, chDigit));
+            } else {
+                blockList.add(new Block(FREE_SPACE, index, chDigit));
+            }
+            index += chDigit;
+        }
+
+        return blockList;
+    }
 }

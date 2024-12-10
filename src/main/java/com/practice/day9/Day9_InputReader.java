@@ -1,24 +1,21 @@
-package com.practice.day8;
+package com.practice.day9;
 
 import com.practice.InputReader;
 
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Day8_InputReader {
-    public char[][] getMap() {
-        return map;
-    }
+public class Day9_InputReader {
+    private final String inputLine;
 
-    private final char[][] map;
-    public Day8_InputReader(String fileName) {
+    public Day9_InputReader(String fileName) {
         Stream<String> lineStreams = InputReader.getLineStreams(fileName);
         List<String> lineList = lineStreams.toList();
-        map = new char[lineList.size()][lineList.getFirst().length()];
+        inputLine = lineList.getFirst();
+    }
 
-        for (int i = 0; i < lineList.size(); i++) {
-            map[i] = lineList.get(i).toCharArray();
-        }
+    public String getInputLine() {
+        return inputLine;
     }
 
 }
