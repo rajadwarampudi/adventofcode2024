@@ -2,6 +2,8 @@ package com.practice;
 
 import com.practice.day1.Day1_Challenge;
 import com.practice.day1.Day1_InputReader;
+import com.practice.day10.Day10_Challenge;
+import com.practice.day10.Day10_InputReader;
 import com.practice.day2.Day2_Challenge;
 import com.practice.day2.Day2_InputReader;
 import com.practice.day3.Day3_Challenge;
@@ -23,8 +25,11 @@ import com.practice.day9.Day9_InputReader;
 public class Main {
     public static void main(String[] args) {
 
+        //day10
+        executeDay10Challenge();
+
         //day9
-        executeDay9Challenge();
+        //executeDay9Challenge();
 
         //day8
         //executeDay8Challenge();
@@ -49,6 +54,22 @@ public class Main {
 
         //day1
         //executeDay1Challenge();
+    }
+
+    private static void executeDay10Challenge() {
+        try {
+            Day10_InputReader day10InputReader = new Day10_InputReader("day10Input.txt");
+            Day10_Challenge day10Challenge = new Day10_Challenge();
+
+            int day_10_1_output = day10Challenge.getTotalTrailheadScoreWithUniqueDestinations(day10InputReader.getTopographicMap());
+
+            System.out.println("Output of day10:");
+            System.out.println("day10_1 output: " + day_10_1_output);
+            System.out.println("Output of day10 completed:");
+
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 10 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay9Challenge() {
