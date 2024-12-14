@@ -36,7 +36,7 @@ public class Day13_Challenge {
         if (tempButtonBCount >= 0 && denominator * tempButtonBCount == numerator) {
             buttonBPressCount = tempButtonBCount;
             long buttonAPressCount = (prizeXPosition - (bxChange * buttonBPressCount)) / axChange;
-            if (buttonAPressCount >= 0) {
+            if (buttonAPressCount >= 0 && (buttonAPressCount * axChange) + (bxChange * buttonBPressCount) == prizeXPosition) {
                 minimumTokensRequired = ((3 * buttonAPressCount) + buttonBPressCount);
             }
         }
