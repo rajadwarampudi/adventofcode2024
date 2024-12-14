@@ -4,6 +4,10 @@ import com.practice.day1.Day1_Challenge;
 import com.practice.day1.Day1_InputReader;
 import com.practice.day10.Day10_Challenge;
 import com.practice.day10.Day10_InputReader;
+import com.practice.day11.Day11_Challenge;
+import com.practice.day11.Day11_InputReader;
+import com.practice.day13.Day13_Challenge;
+import com.practice.day13.Day13_InputReader;
 import com.practice.day2.Day2_Challenge;
 import com.practice.day2.Day2_InputReader;
 import com.practice.day3.Day3_Challenge;
@@ -25,8 +29,14 @@ import com.practice.day9.Day9_InputReader;
 public class Main {
     public static void main(String[] args) {
 
+        // day 13
+        executeDay13Challenge();
+
+        // day 11
+        //executeDay11Challenge();
+
         //day10
-        executeDay10Challenge();
+        //executeDay10Challenge();
 
         //day9
         //executeDay9Challenge();
@@ -54,6 +64,41 @@ public class Main {
 
         //day1
         //executeDay1Challenge();
+    }
+
+    private static void executeDay13Challenge() {
+        try {
+            Day13_InputReader day13InputReader = new Day13_InputReader("day13Input.txt");
+            Day13_Challenge day13Challenge = new Day13_Challenge();
+
+            long day_13_1_output = day13Challenge.countFewestTokensForAllPossiblePrizes(day13InputReader.getMachineInfoList(), 0L);
+            long day_13_2_output = day13Challenge.countFewestTokensForAllPossiblePrizes(day13InputReader.getMachineInfoList(), 10000000000000L);
+            System.out.println("Output of day13:");
+            System.out.println("day13_1 output: " + day_13_1_output);
+            System.out.println("day13_2 output: " + day_13_2_output);
+            System.out.println("Output of day13 completed:");
+
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 13 challenge: " + ex.getMessage());
+        }
+    }
+
+    private static void executeDay11Challenge() {
+        try {
+            Day11_InputReader day11InputReader = new Day11_InputReader("day11Input.txt");
+            Day11_Challenge day10Challenge = new Day11_Challenge();
+
+            //int day_11_1_output = day10Challenge.getNumberOfStonesAfterGivenBlinks(day11InputReader.getStoneList(), 25);
+            long day_11_2_output = day10Challenge.getNumberOfStonesAfterGivenBlinks(day11InputReader.getStoneList(), 75);
+
+            System.out.println("Output of day11:");
+            //System.out.println("day11_1 output: " + day_11_1_output);
+            System.out.println("day11_1 output: " + day_11_2_output);
+            System.out.println("Output of day11 completed:");
+
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 11 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay10Challenge() {
