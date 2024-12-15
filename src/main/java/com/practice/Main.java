@@ -8,6 +8,8 @@ import com.practice.day11.Day11_Challenge;
 import com.practice.day11.Day11_InputReader;
 import com.practice.day13.Day13_Challenge;
 import com.practice.day13.Day13_InputReader;
+import com.practice.day14.Day14_Challenge;
+import com.practice.day14.Day14_InputReader;
 import com.practice.day2.Day2_Challenge;
 import com.practice.day2.Day2_InputReader;
 import com.practice.day3.Day3_Challenge;
@@ -29,8 +31,11 @@ import com.practice.day9.Day9_InputReader;
 public class Main {
     public static void main(String[] args) {
 
+        // day 14
+        executeDay14Challenge();
+
         // day 13
-        executeDay13Challenge();
+        //executeDay13Challenge();
 
         // day 11
         //executeDay11Challenge();
@@ -64,6 +69,20 @@ public class Main {
 
         //day1
         //executeDay1Challenge();
+    }
+
+    private static void executeDay14Challenge() {
+        try {
+            Day14_InputReader day14InputReader = new Day14_InputReader("day14Input.txt");
+            Day14_Challenge day14Challenge = new Day14_Challenge();
+            int day_14_1_output = day14Challenge.calculateSafetyFactor(day14InputReader.getRobotInfoList(), 103, 101);
+            System.out.println("Output of day14:");
+            System.out.println("day14_1 output: " + day_14_1_output);
+            day14Challenge.printRobotPositionsForEverySecond(day14InputReader.getRobotInfoList(), 103, 101, 50000);
+
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 14 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay13Challenge() {

@@ -1,5 +1,7 @@
 package com.practice.day8;
 
+import com.practice.Index;
+
 import java.util.*;
 
 public class Day8_Challenge {

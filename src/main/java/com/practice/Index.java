@@ -1,3 +1,3 @@
-package com.practice.day10;
+package com.practice;
 
 public record Index(int x, int y) { }
