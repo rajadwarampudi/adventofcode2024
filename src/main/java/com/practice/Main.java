@@ -10,6 +10,8 @@ import com.practice.day13.Day13_Challenge;
 import com.practice.day13.Day13_InputReader;
 import com.practice.day14.Day14_Challenge;
 import com.practice.day14.Day14_InputReader;
+import com.practice.day15.Day15_Challenge;
+import com.practice.day15.Day15_InputReader;
 import com.practice.day2.Day2_Challenge;
 import com.practice.day2.Day2_InputReader;
 import com.practice.day3.Day3_Challenge;
@@ -31,8 +33,11 @@ import com.practice.day9.Day9_InputReader;
 public class Main {
     public static void main(String[] args) {
 
+        // day 15
+        executeDay15Challenge();
+
         // day 14
-        executeDay14Challenge();
+        //executeDay14Challenge();
 
         // day 13
         //executeDay13Challenge();
@@ -69,6 +74,19 @@ public class Main {
 
         //day1
         //executeDay1Challenge();
+    }
+
+    private static void executeDay15Challenge() {
+        try {
+            Day15_InputReader day15InputReader = new Day15_InputReader("day15Input.txt");
+            Day15_Challenge day15Challenge = new Day15_Challenge();
+            int day15_1_output = day15Challenge.getGPSCoordinatesSum(day15InputReader.getWarehouseMap(),
+                    day15InputReader.getStartingPosition(), day15InputReader.getMoves());
+            System.out.println("Output of day15:");
+            System.out.println("day15_1 output: " + day15_1_output);
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 15 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay14Challenge() {
