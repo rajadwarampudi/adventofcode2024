@@ -10,6 +10,8 @@ import com.practice.day13.Day13_Challenge;
 import com.practice.day13.Day13_InputReader;
 import com.practice.day14.Day14_Challenge;
 import com.practice.day14.Day14_InputReader;
+import com.practice.day15.Day15_2_Challenge;
+import com.practice.day15.Day15_2_InputReader;
 import com.practice.day15.Day15_Challenge;
 import com.practice.day15.Day15_InputReader;
 import com.practice.day2.Day2_Challenge;
@@ -82,8 +84,16 @@ public class Main {
             Day15_Challenge day15Challenge = new Day15_Challenge();
             int day15_1_output = day15Challenge.getGPSCoordinatesSum(day15InputReader.getWarehouseMap(),
                     day15InputReader.getStartingPosition(), day15InputReader.getMoves());
+
+            Day15_2_InputReader day15_2_InputReader = new Day15_2_InputReader("day15Input.txt");
+            Day15_2_Challenge day15_2_Challenge = new Day15_2_Challenge();
+            long day15_2_output = day15_2_Challenge.getGPSCoordinatesSum(day15_2_InputReader.getWarehouseMap(),
+                    day15_2_InputReader.getStartingPosition(), day15_2_InputReader.getMoves());
+
             System.out.println("Output of day15:");
             System.out.println("day15_1 output: " + day15_1_output);
+            System.out.println("day15_2 output: " + day15_2_output);
+            System.out.println("Output of day15 completed:");
         } catch (Exception ex) {
             System.out.println("Exception occurred for day 15 challenge: " + ex.getMessage());
         }
@@ -97,6 +107,7 @@ public class Main {
             System.out.println("Output of day14:");
             System.out.println("day14_1 output: " + day_14_1_output);
             day14Challenge.printRobotPositionsForEverySecond(day14InputReader.getRobotInfoList(), 103, 101, 50000);
+            System.out.println("Output of day14 completed:");
 
         } catch (Exception ex) {
             System.out.println("Exception occurred for day 14 challenge: " + ex.getMessage());
