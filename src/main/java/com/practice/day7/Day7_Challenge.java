@@ -5,6 +5,12 @@ import java.util.List;
 
 public class Day7_Challenge {
 
+    /**
+     * This method calculates the total sum of calibration values which can be obtained by the given equation input
+     * and the available two operators + and *
+     * @param inputLines
+     * @return sum of calibration values that can be possible with given equation
+     */
     public long getTotalCalibrationResult(List<String> inputLines) {
         long result = 0L;
 
@@ -39,6 +45,12 @@ public class Day7_Challenge {
         }
     }
 
+    /**
+     * This method calculates the total sum of calibration values which can be obtained by the given equation input
+     * and the available three operators + and * and concatenation
+     * @param inputLines
+     * @return sum of calibration values that can be possible with given equation and three available operators
+     */
     public long getTotalCalibrationResultIncludingConcatenationOperator(List<String> inputLines) {
         long result = 0L;
 

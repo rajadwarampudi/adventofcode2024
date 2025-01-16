@@ -11,6 +11,13 @@ public class Day14_Challenge {
 
     private enum Quarter { Q1, Q2, Q3, Q4, IGNORED}
 
+    /**
+     * This method calculates the safety factor as described in day14 of 2024 AoC Challenge
+     * @param robotInfoList
+     * @param rows
+     * @param columns
+     * @return
+     */
     public int calculateSafetyFactor(List<RobotInfo> robotInfoList, int rows, int columns) {
         int q1Total = 0, q2Total = 0, q3Total = 0, q4Total = 0;
         for (RobotInfo robotInfo : robotInfoList) {

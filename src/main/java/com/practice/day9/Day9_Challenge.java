@@ -7,6 +7,27 @@ public class Day9_Challenge {
 
     public static final int FREE_SPACE = -1;
 
+    /**
+     * This method calculates the file system checksum from the given ID number
+     * For example the ID 12345 will be represented as one-block file, two blocks of free space, a three-block file,
+     * four blocks of free space, and then a five-block file.
+     * A disk map like 90909 would represent three nine-block files in a row (with no free space between them).
+     * The amphipod would like to move file blocks one at a time from the end of the disk
+     * to the leftmost free space block (until there are no gaps remaining between file blocks).
+     * For the disk map 12345, the process looks like this:
+     * 0..111....22222
+     * 02.111....2222.
+     * 022111....222..
+     * 0221112...22...
+     * 02211122..2....
+     * 022111222......
+     *
+     * Checksum calculation: To calculate the checksum, add up the result of multiplying each of these blocks' position
+     * with the file ID number it contains. The leftmost block is in position 0.
+     * If a block contains free space, skip it instead.
+     * @param inputLine
+     * @return the calculated checksum
+     */
     public long getFileSystemChecksum(String inputLine) {
         char[] inputCharArray = inputLine.toCharArray();
         List<Integer> diskMapList = generateDiskMapList(inputCharArray);
@@ -15,6 +36,11 @@ public class Day9_Challenge {
 
     }
 
+    /**
+     * This method calculates the checksum just like @getFileSystemChecksum but the movement will be done at once
+     * @param inputLine
+     * @return the calculated checksum
+     */
     public long getFileSystemChecksumWithSameIdFileMovementAtOnce(String inputLine) {
         char[] inputCharArray = inputLine.toCharArray();
         List<Block> blockList = generateBlockList(inputCharArray);

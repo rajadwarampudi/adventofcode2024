@@ -6,12 +6,26 @@ import java.util.*;
 
 public class Day8_Challenge {
 
+    /**
+     * This method counts the number of antinodes that can be set in the given map with antenna positions.
+     * an antinode occurs at any point that is perfectly in line with two antennas of the same frequency
+     * @param map
+     * @return the number of antinodes
+     */
     public int getNumberOfAntiNodes(char[][] map) {
         Map<Character, List<Index>> antennaIndexMap = getAntennaIndexMap(map);
 
         return getAntiNodeCount(antennaIndexMap, map.length, map[0].length);
 
     }
+
+    /**
+     * This method counts the number of antinodes that can be set in the given map with node positions and the existing
+     * antinodes also considered as antennas
+     * an antinode occurs at any point that is perfectly in line with two antennas of the same frequency
+     * @param map
+     * @return the number of antinodes
+     */
 
     public int getNumberOfAntiNodesIncludingAntiNodesAsAntennas(char[][] map) {
         Map<Character, List<Index>> antennaIndexMap = getAntennaIndexMap(map);

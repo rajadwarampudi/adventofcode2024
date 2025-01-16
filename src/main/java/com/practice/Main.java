@@ -14,6 +14,7 @@ import com.practice.day15.Day15_2_Challenge;
 import com.practice.day15.Day15_2_InputReader;
 import com.practice.day15.Day15_Challenge;
 import com.practice.day15.Day15_InputReader;
+import com.practice.day16.Day16_InputReader;
 import com.practice.day2.Day2_Challenge;
 import com.practice.day2.Day2_InputReader;
 import com.practice.day3.Day3_Challenge;
@@ -34,6 +35,8 @@ import com.practice.day9.Day9_InputReader;
 
 public class Main {
     public static void main(String[] args) {
+        // day 16
+        executeDay16Challenge();
 
         // day 15
         executeDay15Challenge();
@@ -76,6 +79,14 @@ public class Main {
 
         //day1
         //executeDay1Challenge();
+    }
+
+    private static void executeDay16Challenge() {
+        try {
+            Day16_InputReader day16InputReader = new Day16_InputReader("day16Input.txt");
+        } catch (Exception ex) {
+            System.out.println("Exception occurred for day 16 challenge: " + ex.getMessage());
+        }
     }
 
     private static void executeDay15Challenge() {

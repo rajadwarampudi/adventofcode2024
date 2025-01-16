@@ -10,6 +10,13 @@ public class Day6_2_Challenge {
     private static final char NEW_OBSTRUCTION = 'O';
 
 
+    /**
+     * This method calculates the minimum number of new Obstructions required to
+     * keep the pointer moving in infinite loops.
+     * @param map
+     * @param startIndex
+     * @return minimum number of new obstructions required
+     */
     public int getNumberOfNewObstructionsToMakeInfiniteLoops(char[][] map, int[] startIndex) {
         int newObstructionCount = 0;
         List<int[]> visitedObstructionsList = new ArrayList<>();

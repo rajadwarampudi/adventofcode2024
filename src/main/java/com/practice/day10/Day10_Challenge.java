@@ -6,6 +6,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Day10_Challenge {
+
+    /**
+     * This method calculates the total trailhead score in a given topgraphicMap
+     * A trailhead is any position that starts one or more hiking trails - here,
+     * these positions will always have height 0. Assembling more fragments of pages,
+     * you establish that a trailhead's score is the number of 9-height positions reachable from that trailhead via a hiking trail.
+     *
+     * This trailhead has a score of 2:
+     *
+     * ...0...
+     * ...1...
+     * ...2...
+     * 6543456
+     * 7.....7
+     * 8.....8
+     * 9.....9
+     * @param topographicMap
+     * @return total TrailHeadScore
+     */
     public int getTotalTrailheadScoreWithUniqueDestinations(int[][] topographicMap) {
         int totalTrailheadScore = 0;
         int rows = topographicMap.length;
@@ -22,6 +41,25 @@ public class Day10_Challenge {
 
         return totalTrailheadScore;
     }
+
+    /**
+     * This method calculates the total trailhead score in a given topgraphicMap with unique trail paths.
+     * A trailhead is any position that starts one or more hiking trails - here,
+     * these positions will always have height 0. Assembling more fragments of pages,
+     * you establish that a trailhead's score is the number of 9-height positions reachable from that trailhead via a hiking trail.
+     *
+     * This trailhead has a score of 2:
+     *
+     * ...0...
+     * ...1...
+     * ...2...
+     * 6543456
+     * 7.....7
+     * 8.....8
+     * 9.....9
+     * @param topographicMap
+     * @return total TrailHeadScore
+     */
 
     public int getTotalTrailheadScoreWithUniqueTrailPaths(int[][] topographicMap) {
         int totalTrailheadScore = 0;

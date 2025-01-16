@@ -10,6 +10,13 @@ public class Day15_Challenge {
     public static final char BOX = 'O';
     public static final char EMPTY_SPACE = '.';
 
+    /**
+     * This method gets the GPS Coordinates sum as desribed in day 15 of 2024 AoC Challenge
+     * @param warehouseMap
+     * @param startingPosition
+     * @param moves
+     * @return
+     */
     public int getGPSCoordinatesSum(char[][] warehouseMap, Index startingPosition, List<Character> moves) {
 
         applyMoves(warehouseMap, moves, startingPosition);
